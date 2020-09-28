@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage App -  Developed by Emmanuel Aina</title>
+    <style>
+        body {
+            font-family: roboto;
+        }
+
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 5px;
+            padding: 20px;
+            border: solid rgb(5, 14, 93);
+
+            ;
+        }
+
+        input {
+            width: 100%;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+            padding: 10px;
+            outline: none;
+            border: none;
+            background-color: rgb(245, 245, 245);
+        }
+
+        .purchasedPriceBtn {
+            width: 100%;
+            margin: auto;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        button.mybtn {
+            background-color: rgb(5, 14, 93);
+            padding: 10px;
+            width: 30%;
+            margin-bottom: 2px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+        }
+
+        button.mybtn:hover {
+            background-color: rgb(233, 154, 6);
+        }
+
+        #calc {
+            width: 100%;
+            text-align: center;
+        }
+
+        button {
+            background-color: rgb(233, 154, 6);
+            color: white;
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 2px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+
+        }
+
+        #title {
+            text-align: center;
+            margin-bottom: 20px;
+
+        }
+
+        h3 {
+            color: rgb(5, 14, 93);
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="title">
+            <img src="image/citycodelogo1.png" alt="">
+
+            <h3>TRY OUR SIMPLE MORTGAGE CALCULATOR POWERED BY CITYCODE MORTGAGE BANK.</h3>
+        </div>
+        <form>
+            <table>
+                <tr>
+                    <td class="labels">Principal Loan Amount</td>
+                    <td class="textbox"><input type="text" id="principal" oninput="calculatePayment()"></td>
+                </tr>
+                <tr>
+                    <td class="labels">Mortgage Period (years)</td>
+                    <td class="textbox"><input type="text" id="termOfLoan" oninput="calculatePayment()"></td>
+                </tr>
+                <tr>
+                    <td class="labels">Annual Interest Rate</td>
+                    <td class="textbox"><input type="text" id="annualInterestRate" oninput="calculatePayment()"></td>
+                </tr>
+                <tr>
+                    <td class="labels">Monthly Mortgage Payment</td>
+                    <td class="textbox"><span id="payment" name="monthlyPayment"></td>
+                </tr>
+                <tr>
+                    <td class="button"><a href="tel:08022792012"><button type="button"
+                                style="width: 100%; background-color: rgb(5, 14, 93);">GET STARTED</button></a></td>
+                    <td class="button"><button style="width: 100%;" type="reset" name="Reset">RESET</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        function calculatePayment() {
+
+
+            var principal = parseFloat(document.getElementById("principal").value);
+
+            let termOfLoan = parseFloat(document.getElementById("termOfLoan").value);
+
+            let annualInterestRate = parseFloat(document.getElementById("annualInterestRate").value);
+
+            let percentageRate = annualInterestRate / 1200;
+            let lengthOfLoan = 12 * termOfLoan;
+            let monthlyPayment = (principal * percentageRate) / (1 - (Math.pow((1 + percentageRate), lengthOfLoan * -1)));
+            monthlyPayment = monthlyPayment.toFixed(2);
+            if (isNaN(monthlyPayment)) {
+                document.getElementById("payment").innerHTML = "";
+
+            } else {
+                document.getElementById("payment").innerHTML = `<span style ="color: rgb(233, 154, 6);
+">N${monthlyPayment}`;
+            }
+
+        }
+    </script>
+</body>
+
+</html>
